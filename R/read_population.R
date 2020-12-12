@@ -261,7 +261,8 @@ read_population <- function( path, type, locus.columns, phased=FALSE, sep=",", h
   l <- as.numeric(substr(l, 2, nchar(l)))
   for( i in 0:l){
     locus_name <- paste("Locus",i,sep="-")
-    idx <- grep(paste("L",i,sep=""),locus_names)
+    #Casey Day added "A" to the grep term to prevent double-counting of loci (e.g. locus 1 and 10), 12/11/20
+    idx <- grep(paste("L",i,"A",sep=""),locus_names)
     x <- loci[,idx]
     get_alleles <- function(x){
       a <- which(x!=0)
