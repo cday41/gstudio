@@ -248,7 +248,8 @@ read_population <- function( path, type, locus.columns, phased=FALSE, sep=",", h
 .read_cdpop <- function( path, ... ) {
   data <- read.csv(path,stringsAsFactors=FALSE, ...)
   col_names <- names(data)
-  locus_names <- grepl("L[[:digit:]]A[[:digit:]]+$",col_names)
+  # Casey Day added '+' after the Locus digit to allow for more than 0-9 loci. 12/11/20
+  locus_names <- grepl("L[[:digit:]]+A[[:digit:]]+$",col_names)
   loci <- data[, col_names[ locus_names ]]
   df <- data[, col_names[ !locus_names] ]
   locus_names <- names(loci)
